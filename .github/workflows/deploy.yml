@@ -23,8 +23,8 @@ jobs:
 
       - name: Deploy proposal
         run: |
-          R CMD BATCH 'ghgenerate.R'
-          cp ghgenerate.Rout out
+          rmarkdown::render("mutant-proposal.Rmd", output_format="html_document", output_file = "index.html", output_dir="out", quiet=TRUE)
+        shell: Rscript {0}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
