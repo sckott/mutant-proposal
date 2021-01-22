@@ -3,12 +3,12 @@
 This is where the proposal should be outlined. 
 -->
 
-## Overview
+<!-- ## Overview -->
 <!--
 At a high-level address what your proposal is and how it will address the problem identified. Highlight any benefits to the R Community that follow from solving the problem. This should be your most compelling section.
 -->
 
-## Detail
+<!-- ## Detail -->
 <!--
 Go into more detail about the specifics of the project and it delivers against the problem.
 
@@ -18,3 +18,14 @@ Depending on project type the detail section should include:
  - [ ] Architecture
  - [ ] Assumptions
 -->
+
+GitHub repositories: <https://github.com/sckott/mutant> <https://github.com/sckott/astr>
+
+### Major pieces to complete
+
+- Creating mutations: First, finish implementing abstract syntax tree (AST) tooling (astr package). Second, finish implementing the use of astr in a comprehensive set of tools in mutant for creating mutations.
+- Implement a queueing system to be able to spin up R sessions across platforms, and then collect results from each session.
+- Functions for reporting to the user results of test runs. Leveraging cli/symbols packages to create easy to interpret results
+- Documentation
+
+(Use a schematic of the workflow within the package?)

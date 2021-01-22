@@ -18,6 +18,18 @@ Covering the actual delivery of the project this section should provide at least
 Including target dates is really important as you need to be committed and the ISC need to have a means of tracking delivery
 -->
 
+Eight weeks in total. 4 hours per day, 4 days per week (16 hrs/wk * 8 weeks = 128 hrs)
+
+- Phase 1: Creating mutations: AST tooling and mutant package functions for creating mutants - package astr
+  - Weeks 1-2 (32 hrs)
+- Phase 2:  Implement queueing tooling to be able to run many R sessions in parallel
+  - Weeks 3-6 (64 hrs)
+- Phase 3: Implement reporting tooling for showing results of mutation testing and pointing out where mutations occurred in the code and what the mutation may indicate
+  - Week 7 (16 hrs)
+- Phase 4: Write detailed package level documentation as well as detailed vignettes for different use cases
+  - Week 8 (16 hrs)
+
+
 ## Other aspects
 <!--
 Covering non-technical activities like on-going publicity, paper preparation, discussion groups etc. that might be required to facilitate successful delivery of the project.

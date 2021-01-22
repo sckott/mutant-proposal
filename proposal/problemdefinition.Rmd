@@ -10,4 +10,22 @@ It is important to cover:
  - [ ] Why it should be tackled
 -->
 
+Unit tests are used to ensure that code works as intended. However, even 100% unit test coverage does not sufficiently ensure that the code is robust to future programming errors, and that there aren’t unused lines of code. Whereas unit testing checks that a module's code works as expected, mutation testing does the same for those unit tests. 
 
+Mutation testing was first proposed by Richard Lipton in 1971, and first implemented in 1980. However, due to the computationally intensive nature of mutation testing, the technique wasn’t used more widely until computer power improved. In mutation testing, the code is broken down to an abstract syntax tree (AST), then a “mutant” is created by changing a single operator (e.g., swap a boolean). The idea is that the unit tests should now fail against the mutant; if a test fails then the mutant is said to be “killed”. When unit tests do not fail against a mutant the mutant has survived and indicates problems.
+
+There are a number of goals in mutation testing: 1) identify weakly tested code, 2) identify weak tests, and 3) xxx. 
+
+Mutation testing entails a fair amount of challenges and complexity, including: the limitations of the R language including lack of tooling for working with R AST’s, the large number of iterations needed, a queueing system for parallel or sequential runs, others?
+
+In the R programming language we do not have an easy way to create and work with an AST of an R script or package. In Python or Ruby, etc. there’s easy to use tools to break down a script into an AST, modify that AST, and rewrite to disk. Given the lack of these AST tools in R, a companion project astr (<https://github.com/sckott/astr>) will help us manage and modify R AST’s.
+
+A full run of mutation testing can be time consuming. For example, if one run of unit tests for a package takes one minute, then for a mutation testing run we’d multiply one minute by dozens or hundreds of runs, one for each mutant. Of course this can be sped up by parallelizing, among other tricks. For large packages, running mutation testing on a cloud hosted CI will be the easiest solution. It will be important to create an easily understandable interface given the long run times possible.
+
+Implementing queues for running all mutants that work across operating systems, and with good failure behavior, will potentially be challenging, but very much solvable. The liteq package will be used to implement the queueing system - which uses a portable SQLite based system that will work on all operating systems.
+
+We propose to finish the `mutant` R package (<https://github.com/sckott/mutant>). There are currently no other mutation testing tools in R. 
+
+The `mutant` package will only work with testthat package at first, but should be easily extended to other testing packages such as tinytest and testit.
+
+Mutation testing in the R community will not be used as widely as unit testing - not every one that uses unit testing will use mutation testing. Those that will find mutation testing most useful will likely be: those in enterprise that place a higher value on code doing what it says it will do; and open source package maintainers with heavily used/depended upon packages. With time mutation testing will likely become more widely adopted in the R community as the benefits become clear. 
