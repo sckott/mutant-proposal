@@ -26,7 +26,7 @@ Eight weeks in total. 4 hours per day, 4 days per week (16 hrs/wk * 8 weeks = 12
   - Weeks 3-6 (64 hrs)
 - Phase 3: Implement reporting tooling for showing results of mutation testing and pointing out where mutations occurred in the code and what the mutation may indicate
   - Week 7 (16 hrs)
-- Phase 4: Write detailed package level documentation as well as detailed vignettes for different use cases
+- Phase 4: Write detailed package level documentation as well as detailed vignettes, including a tutorial for a very small hello world example to get users oriented, as well as a tutorial for a larger package with a lot of code and tests to demonstrate solutions for saving time, running on CI, and more
   - Week 8 (16 hrs)
 
 

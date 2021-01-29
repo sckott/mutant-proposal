@@ -1,5 +1,5 @@
 ---
-title: "mutant"
+title: "mutant: mutation testing for R"
 author: "Scott Chamberlain"
 date: "`r Sys.Date()`"
 output: html_document
@@ -26,4 +26,7 @@ knitr::opts_knit$set(warning = FALSE, message= FALSE)
 ```
 
 ```{r autodoc, child='proposal/success.Rmd', eval=TRUE}
+```
+
+```{r autodoc, child='proposal/refs.Rmd', eval=TRUE}
 ```

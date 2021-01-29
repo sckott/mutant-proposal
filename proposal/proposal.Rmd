@@ -19,13 +19,79 @@ Depending on project type the detail section should include:
  - [ ] Assumptions
 -->
 
-GitHub repositories: <https://github.com/sckott/mutant> <https://github.com/sckott/astr>
+We propose to finish the mutant R package. mutant will learn from the success of the usethis package, with intuitive functions with clear use cases, as well as helper functions to setup required infrastructure mutant requires. There are no other mutation testing tools in R that I know of. 
+
+The mutant package will only work with the testthat package at first because it is the most popular testing package: ~5540 reverse dependencies for testthat compared to 129 for tinytest, and 33 for testit. Mutant should be easily extended to the other two testing packages.
+
+To make manipulating R ASTs easier for the mutation testing, a companion project astr (<https://github.com/sckott/astr>) will help us manage and modify R AST’s.
+
+We’ll address the time consuming nature of mutation testing with various approaches. I’ll  leverage the callr package to run multiple and parallel R processes in the background at the same time. In addition, I’ll make clear documentation on when to use mutation testing; for example, you don’t need to run mutation tests after every code change as you might for unit tests.
+
+A well done queueing system will be important. The liteq package will be used to implement the queueing system - which uses a portable SQLite based system that will work on all operating systems. The R6 package will be used to implement the queueing logic.
+
+Mutation testing in the R community will not be used as widely as unit testing - not every one that uses unit testing will use mutation testing. Those that will find mutation testing most useful will likely be: those in enterprise that place a higher value on code doing what it says it will do; and open source package maintainers with heavily used/depended upon packages. With time mutation testing will likely become more widely adopted in the R community as the benefits become clear, and the cost of doing mutation testing (time) decreases. 
+
+
+The following is an example using pseudo-code. Although the mutant package has many of the pieces, it does not yet have working code to show an example.
+
+Code in a file `R/foo.R`:
+
+```r
+less_than_ten <- function(x) {
+  z <- x + 5
+  z < 10
+}
+```
+
+Create two mutants:
+
+```r
+less_than_ten <- function(x) {
+  z <- x - 5 # changed + to -
+  z < 7 # 10 changed to 7
+}
+```
+
+Run mutant:
+
+```r
+library(mutant)
+mutant::run()
+```
+
+Output:
+
+```r
+Mutant killed: R/foo.R: line 2:5
+  Mutator: ReplaceOperator
+  -  z <- x + 5
+  +  z <- x - 5
+
+  Mutant survived: R/foo.R: line 10:27
+  Mutator: SwapNumber
+  -  z < 10
+  +  z < 7
+```
+
+In the above example, one mutant was killed (good) and one survived (bad). That is, the unit tests for this function are adequate for the first mutation (no changes needed), but are not adequate for the second mutation. 
+
+
 
 ### Major pieces to complete
 
 - Creating mutations: First, finish implementing abstract syntax tree (AST) tooling (astr package). Second, finish implementing the use of astr in a comprehensive set of tools in mutant for creating mutations.
-- Implement a queueing system to be able to spin up R sessions across platforms, and then collect results from each session.
+- Implement a queueing system to be able to spin up R sessions, and then collect results from each session.
 - Functions for reporting to the user results of test runs. Leveraging cli/symbols packages to create easy to interpret results
 - Documentation
+  - (edit this) From Maelle: what would it take for a package maintainer to get started with mutation testing their package? running a setup function only? more?
+
 
 (Use a schematic of the workflow within the package?)
+
+
+### Dissemination
+
+- License: is currently MIT, and there’s no plans to change the license
+- Code is on GitHub <https://github.com/sckott/mutant>, <https://github.com/sckott/astr>
+- Blog posts, rOpenSci community call, conference talk, R Consortium blog post
+- Submission to CRAN
