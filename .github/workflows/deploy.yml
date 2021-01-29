@@ -24,6 +24,7 @@ jobs:
       - name: Deploy proposal
         run: |
           rmarkdown::render("mutant-proposal.Rmd", output_format="html_document", output_file = "index.html", output_dir="out", quiet=TRUE)
+          rmarkdown::render("mutant-proposal.Rmd", output_format="pdf_document", output_file = "index.pdf", output_dir="out", quiet=TRUE)
         shell: Rscript {0}
 
       - name: Deploy 🚀
